@@ -12,6 +12,6 @@ jobs:
       - run: npm ci && npm run build
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
-          repoToken: "${{ secrets.FIREBASE_TOKEN }}"
+          repoToken: "${{ secrets.GITHUB_TOKEN }}"
           firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT_YT_CLONE_99 }}"
           projectId: yt-clone-99

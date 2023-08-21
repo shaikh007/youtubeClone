@@ -11,6 +11,9 @@ import {
     SELECTED_VIDEO_FAIL,
     SELECTED_VIDEO_REQUEST,
     SELECTED_VIDEO_SUCCESS,
+    SUBSCRIPTIONS_CHANNEL_FAIL,
+    SUBSCRIPTIONS_CHANNEL_REQUEST,
+    SUBSCRIPTIONS_CHANNEL_SUCCESS,
 } from "../actionType";
 
 import request from "../../api";
@@ -132,6 +135,34 @@ export const getVideosBySearch = (keyword) => async(dispatch) => {
         });
     }
 };
+
+export const getSubscribedChannels = () => async(dispatch, getState) => {
+    try {
+        dispatch({
+            type: SUBSCRIPTIONS_CHANNEL_REQUEST,
+        })
+        const { data } = await request('/subscriptions', {
+            params: {
+                part: 'snippet,contentDetails',
+
+                mine: true,
+            },
+            headers: {
+                Authorization: `Bearer ${getState().auth.accessToken}`,
+            },
+        })
+        dispatch({
+            type: SUBSCRIPTIONS_CHANNEL_SUCCESS,
+            payload: data.items,
+        })
+    } catch (error) {
+        console.log(error.response.data)
+        dispatch({
+            type: SUBSCRIPTIONS_CHANNEL_FAIL,
+            payload: error.response.data,
+        })
+    }
+}
 
 export const getVideosByChannel = (id) => async(dispatch) => {
     try {

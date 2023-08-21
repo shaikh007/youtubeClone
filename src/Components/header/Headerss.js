@@ -7,7 +7,7 @@ import { MdNotifications, MdApps } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-const Headerss = ({ handleToggleSidebar }) => {
+const Headerss = ({ handleToggle }) => {
   const [input, setInput] = useState("");
 
   const navigate = useNavigate();
@@ -24,7 +24,7 @@ const Headerss = ({ handleToggleSidebar }) => {
       <FaBars
         className="header__menu"
         size={26}
-        onClick={() => handleToggleSidebar()}
+        onClick={() => handleToggle()}
       />
 
       <img
